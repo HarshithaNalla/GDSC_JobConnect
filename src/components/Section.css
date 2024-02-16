@@ -1,0 +1,107 @@
+.section {
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 700px; /* Adjust if needed */
+  }
+  .bmc
+  {
+    display: flex;
+    flex-direction: column;
+  }
+  h2 {
+    font-size: 1.8rem;
+    color: #53777a; /* Customize text color */
+    margin-bottom: 1rem;
+  }
+  
+  .boxes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem; /* Adjust gap as needed */
+  }
+  
+  .box {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease-in-out;
+    cursor: pointer; /* Indicate clickable functionality */
+    flex: 1; /* Fill available space equally */
+  
+    &:hover {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .box h3 {
+    font-size: 1.2rem;
+    color: #333; /* Customize text color */
+    margin-bottom: 0.5rem;
+  }
+  
+  .box p {
+    font-size: 0.9rem;
+    color: #666; /* Customize text color */
+    margin-bottom: 1rem;
+  }
+  
+  .box button {
+    background-color: #007bff; /* Customize button color */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #0069d9;
+    }
+  }
+  
+  .search-box {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center search box */
+  }
+  
+  .search-box input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+  }
+  
+  .search-box button {
+    background-color: #007bff; /* Customize button color */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+  
+    &:hover {
+      background-color: #0069d9;
+    }
+  }
+  
+  /* Optional gradient backgrounds for boxes: */
+  
+  .box-job-provider {
+    background: linear-gradient(to right, #f9d0c4, #f6b2ab); /* Orange gradient */
+  }
+  
+  .box-apply-for-job {
+    background: linear-gradient(to right, #c8e0f3, #b1d0e2); /* Blue gradient */
+  }
+  
+  .box-enroll-as-worker {
+    background: linear-gradient(to right, #f2e2c0, #f0dbad); /* Yellow gradient */
+  }
+  
+  /* You can add more gradient options or remove them if you prefer */
+  
+  

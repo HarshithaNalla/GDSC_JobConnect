@@ -1,0 +1,113 @@
+/* General styles */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #f2f2f2;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Added for fixed position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* Ensure header stays on top */
+  }
+  
+  .header-left,
+  .header-center,
+  .header-right {
+    flex: 1;
+  }
+  
+  .header-center h1 {
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* Profile picture styling */
+  .header-left img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  .header-left:hover
+  {
+    cursor: pointer;
+  }
+  /* Navigation list styling */
+  .header-right-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .header-right-nav li {
+    margin-right: 1rem;
+  }
+  
+  .header-right-nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .header-right-nav a:hover {
+    color: #007bff;
+  }
+  
+  /* Profile navbar styling */
+  .profile-nav {
+    position: fixed;
+    top: 9%;
+    left: -100%;
+    width: 200px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* transition: left 0.3s ease-in-out, transform 0.3s ease-in-out; */
+  }
+  /* ... your existing CSS styles ... */
+
+.profile-nav {
+    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out; /* Combine transitions */
+  }
+  
+  .profile-nav.active {
+    left: 0;
+    top: 9%;
+    transform: translateX(0); /* Add smooth sliding animation */
+  }
+  
+  @keyframes navslide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0); /* Animate only the final state */
+    }
+  }
+  
+  
+  .profile-nav ul {
+    list-style: none;
+    padding: 2rem;
+  }
+  
+  .profile-nav li {
+    margin-bottom: 1rem;
+  }
+  
+  .profile-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .profile-nav a:hover {
+    color: #007bff;
+  }
+  
