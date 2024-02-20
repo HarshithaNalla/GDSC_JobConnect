@@ -1,4 +1,36 @@
+.section_box
+{
+  margin-top: 10%;
+  overflow-y: scroll;
+}
+.allforms {
+  position: relative;
+  visibility: hidden;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  width: 80%;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform-origin: top center;
+  transition: opacity 0.5s, transform 1s;
+}
+
+.allforms.show {
+  visibility: visible;
+  margin: 30px;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
 .section {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     margin: 2rem auto;
     max-width: 700px; /* Adjust if needed */
@@ -7,6 +39,7 @@
   {
     display: flex;
     flex-direction: column;
+    /* position: absolute; */
   }
   h2 {
     font-size: 1.8rem;

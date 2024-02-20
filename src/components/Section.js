@@ -2,23 +2,27 @@ import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
 import "./Section.css";
 import { JobProviderForm, ApplyForJobForm, EnrollAsWorkerForm } from "./Forms";
+import { uid } from "../SignUp";
 
 export default function Section() {
   const history = useNavigate();
+
   const logout = (e) => {
     e.preventDefault();
     signOut(auth)
       .then(() => {
         console.log("Logged out");
-        history("/signup");
+        history("/");
       })
       .catch((error) => {
         alert(error.message);
       });
   };
-  const [activeForm, setActiveForm] = useState(null); // Manage active form state
+
+  const [activeForm, setActiveForm] = useState(null);
 
   const handleFormClick = (formType) => {
     setActiveForm(formType);
@@ -32,9 +36,8 @@ export default function Section() {
     <div>
       <section className="section">
         <div className="bmc">
-        <h2>Looking for opportunities?</h2>
+          <h2>Looking for opportunities?</h2>
           <div className="boxes-container">
-            
             <div
               className="box box-job-provider"
               onClick={() => handleFormClick("jobProvider")}
@@ -58,18 +61,11 @@ export default function Section() {
             </div>
           </div>
         </div>
-        {activeForm && (
-          <div className={`form-container form-${activeForm}`}>
-            <div className="form-inner">
-              <button className="close-button" onClick={closeForm}>
-                &times;
-              </button>
-              {activeForm === "jobProvider" && <JobProviderForm />}
-              {activeForm === "applyForJob" && <ApplyForJobForm />}
-              {activeForm === "enrollAsWorker" && <EnrollAsWorkerForm />}
-            </div>
-          </div>
-        )}
+        <div className={`allforms ${activeForm ? 'show' : ''}`}>
+          {activeForm === "jobProvider" && <JobProviderForm uid={uid}/>}
+          {activeForm === "applyForJob" && <ApplyForJobForm uid={uid}/>}
+          {activeForm === "enrollAsWorker" && <EnrollAsWorkerForm uid={uid}/>}
+        </div>
       </section>
 
       <button onClick={logout}>Log out</button>

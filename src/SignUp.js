@@ -1,23 +1,34 @@
 import React, { useState } from "react";
 import "./style.css"; // Import your CSS file
 import { auth } from "./firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, signupwithgoogle } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { Navigate } from "react-router-dom";
-import Loading from "./Loading";
-
+import { MyContext } from "./MyContext";
+// import Loading from "./Loading";
+let uid;
+let usercred;
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isActive, setActive] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isloading, setisloading]=useState(false);
-
+  const [isloading, setisloading] = useState(false);
+  // const db = fir;
+  
   const createUser = (e) => {
     e.preventDefault();
-    
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        <Navigate to="/Home" />
+        console.log(userCredential.user.id);
+        uid=userCredential.user.uid;
+        usercred = userCredential;
+        setLoggedIn(true);
+        // <Navigate to="/Home" />
       })
       .catch((error) => {
         alert(error.message);
@@ -26,24 +37,32 @@ const SignUp = () => {
 
   const signIn = (e) => {
     e.preventDefault();
-    <Navigate to="/Loading" />
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        console.log(userCredential.user.uid);
+        uid=userCredential.user.uid;
+        usercred = userCredential;
+        // <MyContext.Provider value={userCredential.user.uid}>
+        //   {/* <ChildComponent /> */}
+        // </MyContext.Provider>;
         // alert(userCredential);
-        <Navigate to="/Home" />
+        // <Navigate to="/Home" />
         setLoggedIn(true);
       })
       .catch((error) => {
         alert(error.message);
       });
   };
+  
 
   const logout = (e) => {
-    signOut(auth).then(() => {
-      window.location.reload();
-    }).catch((error) => {
-      console.log(error);
-    });
+    signOut(auth)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleToggle = () => {
@@ -51,10 +70,9 @@ const SignUp = () => {
     // You can setLoggedIn(true) here if needed
   };
 
-
-  return ( 
+  return (
     <div>
-      {loggedIn && <Navigate to="/home" />} {/* Redirect if logged in */}
+      {loggedIn && <Navigate to={"/home"} />}
       <div className={`container ${isActive ? "active" : ""}`} id="container">
         <div className="form-container sign-up">
           <form onSubmit={createUser}>
@@ -76,9 +94,7 @@ const SignUp = () => {
               placeholder="Password"
             />
             <button type="submit">Up sign</button>
-            <div className="social-icons">
-              {/* ... */}
-            </div>
+            <div className="social-icons">{/* ... */}</div>
           </form>
         </div>
         <div className="form-container sign-in">
@@ -100,10 +116,15 @@ const SignUp = () => {
               placeholder="Password"
             />
             <a href="#">Forget Your Password?</a>
-            <button type="submit" onClick={()=>{<Navigate to="/Loading" />}}>Sign In</button>
-            <div className="social-icons">
-              {/* ... */}
-            </div>
+            <button
+              type="submit"
+              onClick={() => {
+                <Navigate to="/Loading" />;
+              }}
+            >
+              Sign In
+            </button>
+            <div className="social-icons">{/* ... */}</div>
           </form>
         </div>
         <div className="toggle-container">
@@ -139,5 +160,6 @@ const SignUp = () => {
     </div>
   );
 };
-
 export default SignUp;
+export {uid};
+export {usercred};
