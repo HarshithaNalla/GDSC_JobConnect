@@ -1,140 +1,234 @@
-.section_box
-{
-  margin-top: 10%;
-  overflow-y: scroll;
-}
-.allforms {
-  position: relative;
-  visibility: hidden;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(-100%);
-  width: 80%;
-  max-width: 400px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform-origin: top center;
-  transition: opacity 0.5s, transform 1s;
+.searching {
+  display: flex; /* Ensure horizontal layout */
+  align-items: center; /* Vertically align content */
+  width: 100%; /* Make the box span the full width */
+  height: 40px; /* Adjust height as needed */
+  background-color: #fff; /* Set background color */
+  border: 1px solid #ccc; /* Add a subtle border */
+  border-radius: 50px; /* Create the curved edges */
+  overflow: hidden; /* Prevent content from overflowing */
 }
 
-.allforms.show {
-  visibility: visible;
-  margin: 30px;
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+.searching input[type="text"] {
+  border: none; /* Remove default input border */
+  outline: none; /* Remove focus outline */
+  padding: 0 10px 0 30px; /* Provide space for text and icon */
+  font-size: 16px;
+  height: 100%; /* Make input fill the height */
+  background-color: transparent; /* Remove default input background */
 }
 
+.searching input[type="text"]::placeholder {
+  color: #ccc; /* Set placeholder text color */
+}
+
+.searching button {
+  margin-left: 65%;
+  border: none; /* Remove default button border */
+  outline: none; /* Remove focus outline */
+  background-color: transparent; /* Remove default button background */
+  cursor: pointer; /* Indicate clickable behavior */
+  padding: 0 10px; /* Add padding for better visual distinction */
+  font-size: 16px;
+  color: #333; /* Set button text color */
+}
+
+.searching button:hover {
+  color: #007bff; /* Change button text color on hover */
+}
+
+.searching .icon {
+  position: absolute; /* Position the icon inside the input */
+  top: 50%; /* Vertically center the icon */
+  left: 10px; /* Position the icon horizontally with padding */
+  transform: translateY(-50%); /* Adjust vertical alignment if needed */
+  color: #ccc; /* Set icon color */
+}
 
 .section {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 2rem auto;
-    max-width: 700px; /* Adjust if needed */
+  text-align: center;
+  /* margin: 2rem auto; */
+  max-width: 1000px; /* Adjust if needed */
+  margin-top: 0%;
+  height: auto;
+}
+.bmc
+{
+  display: flex;
+  flex-direction: column;
+}
+h2 {
+  font-size: 1.8rem;
+  color: #53777a; /* Customize text color */
+  margin-bottom: 1rem;
+}
+#worker_container
+{
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.grid_item {
+  background-color: #365478; /* Lighter blue */
+  padding: 20px;
+  margin-left: 60px;
+  margin-top: 50px;
+  width: 280px;
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 5px rgba(236, 235, 235, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+  height: 350px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color:#d3dbe5;
+}
+.boxes-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem; /* Adjust gap as needed */
+  width: 950px;
+  height: 350px;
+}
+.box {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 0.2rem;
+  max-width: 500px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  flex: 0 0 calc(33.33% - 1rem);
+}
+
+.box img {
+  width: 300px;
+  height: 250px; /* Set your desired height for the images */
+  object-fit: cover;
+  border-radius: 5px; /* Optional: Apply border-radius to the image */
+}
+
+.box::before {
+  content: '';
+  z-index: -2;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 5px; /* Adjust the border-radius to match your box */
+  box-shadow: 0 0 20px 10px #1976ed; /* Adjust the shadow values for the desired glow effect */
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
   }
-  .bmc
-  {
-    display: flex;
-    flex-direction: column;
-    /* position: absolute; */
+  100% {
+    transform: rotate(360deg);
   }
-  h2 {
-    font-size: 1.8rem;
-    color: #53777a; /* Customize text color */
-    margin-bottom: 1rem;
+}
+.searching
+{
+  margin-top: 200px;
+}
+.box:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px); /* Add lift effect on hover */
+}
+.box h3 {
+  font-size: 1.2rem;
+  color: #333; /* Customize text color */
+  margin-bottom: 0.5rem;
+}
+
+.box p {
+  font-size: 0.9rem;
+  color: #666; /* Customize text color */
+  margin-bottom: 1rem;
+}
+
+.box button {
+  background-color: #007bff; /* Customize button color */
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #0069d9;
   }
-  
-  .boxes-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1rem; /* Adjust gap as needed */
+}
+
+.search-box {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center search box */
+}
+
+.animated-border-box-glow {
+  overflow: hidden;
+  position: relative; /* Add position relative to the box */
+}
+
+.animated-border-box-glow:before {
+  content: '';
+  z-index: -1;
+  /* text-align: center; */
+  top: 0;
+  left: 0;
+  /* right: 50%;
+  bottom: 50%; */
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 10px #b119ed; /* Adjust the shadow values for the desired glow effect */
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
-  
-  .box {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.2s ease-in-out;
-    cursor: pointer; /* Indicate clickable functionality */
-    flex: 1; /* Fill available space equally */
-  
-    &:hover {
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
-  
-  .box h3 {
-    font-size: 1.2rem;
-    color: #333; /* Customize text color */
-    margin-bottom: 0.5rem;
+}
+
+.search-box input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+}
+
+.search-box button {
+  background-color: #007bff; /* Customize button color */
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+
+  &:hover {
+    background-color: #0069d9;
   }
-  
-  .box p {
-    font-size: 0.9rem;
-    color: #666; /* Customize text color */
-    margin-bottom: 1rem;
-  }
-  
-  .box button {
-    background-color: #007bff; /* Customize button color */
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: #0069d9;
-    }
-  }
-  
-  .search-box {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center search box */
-  }
-  
-  .search-box input {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    flex: 1;
-  }
-  
-  .search-box button {
-    background-color: #007bff; /* Customize button color */
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 0.5rem;
-  
-    &:hover {
-      background-color: #0069d9;
-    }
-  }
-  
-  /* Optional gradient backgrounds for boxes: */
-  
-  .box-job-provider {
-    background: linear-gradient(to right, #f9d0c4, #f6b2ab); /* Orange gradient */
-  }
-  
-  .box-apply-for-job {
-    background: linear-gradient(to right, #c8e0f3, #b1d0e2); /* Blue gradient */
-  }
-  
-  .box-enroll-as-worker {
-    background: linear-gradient(to right, #f2e2c0, #f0dbad); /* Yellow gradient */
-  }
-  
-  /* You can add more gradient options or remove them if you prefer */
-  
-  
+}
+
+p {
+padding: 0.5rem;
+
+}

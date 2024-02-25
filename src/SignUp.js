@@ -7,21 +7,35 @@ import {
   signOut,
 } from "firebase/auth";
 import { Navigate } from "react-router-dom";
-import { MyContext } from "./MyContext";
+// import { MyContext } from "./MyContext";
+import emailjs from "@emailjs/browser";
+import Loading from "./Loading";
 // import Loading from "./Loading";
 let uid;
 let usercred;
 const SignUp = () => {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isActive, setActive] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isloading, setisloading] = useState(false);
+  // const [isloading, setisloading] = useState(false);
+  let isloading=false;
+  const setisloading=(val)=> {
+    isloading = val;
+    console.log(`Is loading: ${isloading}`);
+  }
+  const [verified,setverified]=useState(false);
   // const db = fir;
   
-  const createUser = (e) => {
+  const createUser = async (e) => {
+    // load.style.display="block";
     e.preventDefault();
-
+    
+    if(verified)
+    {
+     await setisloading(true);
+     console.log(isloading);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential.user.id);
@@ -33,10 +47,18 @@ const SignUp = () => {
       .catch((error) => {
         alert(error.message);
       });
+    }
+    else
+    {
+      alert("First verify your email");
+    }
+    setisloading(false);
   };
-
-  const signIn = (e) => {
+  
+  const signIn = async (e) => {
     e.preventDefault();
+    await setisloading(true);
+    console.log(isloading);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential.user.uid);
@@ -52,6 +74,7 @@ const SignUp = () => {
       .catch((error) => {
         alert(error.message);
       });
+      setisloading(false);
   };
   
 
@@ -69,8 +92,66 @@ const SignUp = () => {
     setActive(!isActive);
     // You can setLoggedIn(true) here if needed
   };
+  function generateOTP() {
+    // Generate a 6 digit random number
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    // Ensure the number is exactly 6 digits
+    return otp.toString().substring(0, 6);
+}
+const [otp,setotp]=useState("");
+const [otpsent,setotpsent]=useState(false);
+const service_id="service_t7clnml";
+const template_id="template_43s5e4j";
+const public_key="4jr4qt1miWuV4Bglg";
+const sendotp = async (e)=>
+{
+  await setotpsent(true);
+  console.log(otp);
+  setotp(await  generateOTP());
+  const templateParams={
+    to_name: document.getElementById('otpemail').value,
+    message:"Your OTP is :"+otp+" kindly do not share otp with others",
+    from_name:"Team Job_Connect",
+    reply_to:document.getElementById('otpemail').value
+  }
+  console.log(templateParams);
+  e.preventDefault();
+  
+  // ab.style.display='none';
+  // cd.style.display='block';
+  console.log(email);
+  console.log(document.getElementById('otpemail').value);
+  emailjs.send(service_id,template_id,templateParams,public_key)
+  .then((response)=>{
+    console.log("Email sent succesfully");
+  })
+  .catch((error)=>
+  {
+    console.log("Error occured");
+    console.log(error);
+  });
+  console.log(otp);
+}
+const verifyotp=(e)=>
+{
+  e.preventDefault();
+  const x=document.getElementById('enteredotp').value;
+  console.log(x+" "+otp);
+  if(x==otp)
+  {
+    setverified(true);
+  }
 
+}
+const ab=document.getElementById('sendotp');
+const cd=document.getElementById('verifyotp');
+
+// load.style.display='none';
+// cd.style.display='none';
   return (
+    <>
+    {/* { !isloading && <Loading id="load" />} */}
+    <Loading id="load" />
     <div>
       {loggedIn && <Navigate to={"/home"} />}
       <div className={`container ${isActive ? "active" : ""}`} id="container">
@@ -82,11 +163,18 @@ const SignUp = () => {
             <input
               type="email"
               value={email}
+              id="otpemail"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
               placeholder="Email"
             />
+            <div className="otp">
+              <input type="text" placeholder="Enter your OTP here" id="enteredotp"/>
+               { !otpsent && <button id="sendotp" onClick={sendotp}>send otp</button>}
+               { otpsent && <button id="verifyotp" onClick={verifyotp}>Verify OTP</button>}
+
+            </div>
             <input
               type="password"
               value={password}
@@ -158,6 +246,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 export default SignUp;

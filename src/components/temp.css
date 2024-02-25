@@ -1,0 +1,55 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f0f0f0; /* Choose your desired color */
+  }
+  
+  .header-left,
+  .header-center,
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-center h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .menu,
+  .slide-menu {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    display: none;
+  }
+  
+  .active {
+    display: block;
+  }
+  
+  /* Responsive menu */
+  @media (max-width: 768px) {
+    .header-right {
+      display: none;
+    }
+  
+    .header-left {
+      justify-content: space-between;
+    }
+  
+    .header-left .menu {
+      position: relative; /* So it doesn't overlap profile picture */
+      top: 100%;
+      left: 0;
+    }
+  
+    .header-burger {
+      display: block;
+      cursor: pointer;
+    }
+  }
+  
